@@ -1,7 +1,6 @@
 import { Request, Response } from "express";
-import * as authServices from '../services/authServices'
-import * as interfaces from '../interfaces/interfaces'
-
+import * as authServices from '../services/authServices';
+import * as interfaces from '../interfaces/interfaces';
 
 export async function signUpController(req: Request, res: Response) {
     const userInput: interfaces.IuserAthenticationData = req.body;
@@ -12,8 +11,9 @@ export async function signUpController(req: Request, res: Response) {
 }
 
 export async function signInController(req: Request, res: Response) {
-    
+    const userInput: interfaces.IuserAthenticationData = req.body;
 
+    const token = await authServices.signInService(userInput);
 
-    res.sendStatus(200);
+    res.status(200).send({ yourToken: token});
 }

@@ -6,12 +6,11 @@ export function createToken (payload: jwt.JwtPayload){
     return token;
 }
 
-
 export function verifyToken(token: string){
     try {
         const verifyToken =  jwt.verify(token, String(process.env.JWT_SECRET));
         return verifyToken;
     } catch (error) {
-        return error;
+        return false;
     }
 }
