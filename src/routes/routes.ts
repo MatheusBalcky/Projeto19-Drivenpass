@@ -1,8 +1,8 @@
 import { Router } from "express";
 import { signUpController, signInController } from "../controllers/authController";
 import { authMiddle } from "../middlewares/authMiddle";
-import { createCredentialController } from "../controllers/credentialsController";
-import { createCredentialMiddle } from "../middlewares/createCredentialMiddle";
+import { createCredentialController, getCredentialsController } from "../controllers/credentialsController";
+import { createCredentialMiddle, getCredentialsMiddle } from "../middlewares/credentialsMiddle";
 
 const routes = Router();
 
@@ -18,7 +18,7 @@ routes.post('/createCredential', createCredentialMiddle, createCredentialControl
 
 
 //& Create new record
-routes.post('/createRegister');
+routes.get('/credentials', getCredentialsMiddle, getCredentialsController);
 
 
 

@@ -14,3 +14,11 @@ export function verifyToken(token: string){
         return false;
     }
 }
+
+export function validateToken(token: string) {
+    const result = verifyToken(token);
+    if(!result){
+        throw { type: 'unauthorized', message: 'Invalid token!'}
+    }
+    return result
+}
