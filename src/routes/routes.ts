@@ -1,8 +1,16 @@
 import { Router } from "express";
 import { signUpController, signInController } from "../controllers/authController";
 import { authMiddle } from "../middlewares/authMiddle";
-import { createCredentialController, getCredentialsController, deleteCredentialController } from "../controllers/credentialsController";
-import { createCredentialMiddle, getCredentialsMiddle, deleteCredentialsMiddle } from "../middlewares/credentialsMiddle";
+import { 
+    createCredentialController,
+    getCredentialsController,
+    deleteCredentialController } from "../controllers/credentialsController";
+import { 
+    createCredentialMiddle,
+    getCredentialsMiddle,
+    deleteCredentialsMiddle } from "../middlewares/credentialsMiddle";
+import { createSafenoteMiddle, getSafenoteMiddle, deleteSafenoteMiddle } from "../middlewares/safenotesMiddle";
+import { createSafenoteController, getSafenoteController, deleteSafenoteController} from "../controllers/safenotesController";
 
 const routes = Router();
 
@@ -13,16 +21,17 @@ routes.post('/signup', authMiddle, signUpController);
 routes.post('/signin', authMiddle, signInController);
 
 
-//& Get records from the user
-routes.post('/createCredential', createCredentialMiddle, createCredentialController);
+// * CREDENTIALS ROUTES
+routes.post('/create-credential', createCredentialMiddle, createCredentialController); //& Route to create a new credential in the database by the user
+routes.get('/credentials', getCredentialsMiddle, getCredentialsController); //& Get credentials by id or not (all credentials)
+routes.delete('/credentials/:credentialId', deleteCredentialsMiddle, deleteCredentialController); //& Delete credential by id
 
 
-//& Get credentials by id or not
-routes.get('/credentials', getCredentialsMiddle, getCredentialsController);
+// * SAFE NOTES ROUTES
+routes.post('/create-safenote', createSafenoteMiddle, createSafenoteController); //& Route to create a new safe note in the database by the user
+routes.get('/safenotes', getSafenoteMiddle, getSafenoteController ); //& Get safe notes by id or not (all credentials)
+routes.delete('/safenote/:safenoteId', deleteSafenoteMiddle, deleteSafenoteController); //& Delete safe note by id
 
-
-//& Delete credential by id
-routes.delete('/credentials/:credentialId', deleteCredentialsMiddle, deleteCredentialController);
 
 
 

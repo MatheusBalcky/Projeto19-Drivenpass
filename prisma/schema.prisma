@@ -16,6 +16,7 @@ model users {
   password    String
   created_at  DateTime      @default(now())
   credentials credentials[]
+  safenotes safenotes[]
 }
 
 model credentials {
@@ -28,6 +29,18 @@ model credentials {
   url String
   username String @db.VarChar(80)
   password String
+
+  @@unique([title, user_id])
+}
+
+model safenotes {
+  id      Int   @id @default(autoincrement())
+
+  author  users @relation(fields: [user_id], references: [id])
+  user_id Int
+
+  title String @db.VarChar(50)
+  annotation String @db.VarChar(1000)
 
   @@unique([title, user_id])
 }
