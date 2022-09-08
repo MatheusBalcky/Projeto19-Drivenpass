@@ -16,3 +16,8 @@ export async function insertNewCredential(credentialData: interfaces.credentials
     const result = await prisma.credentials.create( { data: credentialData });
     return result;
 }
+
+export async function deleteCredentialById(credentialId: number) {
+    const result = await prisma.credentials.delete( { where: { id: credentialId}});
+    return result;
+}

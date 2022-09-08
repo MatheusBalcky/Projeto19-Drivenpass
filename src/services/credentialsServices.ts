@@ -15,9 +15,20 @@ export async function getCredentialsService(credentialId: number | null, userId:
         return decryptPassword(result);
     }
     
-    const result = await getOneCredentialById(credentialId!, userId);
+    const result = await getOneCredentialByIdAndVerify(credentialId!, userId);
     return decryptPassword([result]);
 }
+
+export async function deleteCredentialService(credentialId: number, userId: number) {
+    
+    await getOneCredentialByIdAndVerify(credentialId, userId);
+
+    await credentialsRepositories.deleteCredentialById(credentialId);
+}
+
+
+
+
 
 function organizeDataToInsert(userId: number, credentialData: interfaces.credentialData): interfaces.credentialsToInsert{
     const dataToInsert = {
@@ -30,7 +41,7 @@ function organizeDataToInsert(userId: number, credentialData: interfaces.credent
     return dataToInsert;
 }
 
-async function getOneCredentialById(credentialId: number, userId: number) {
+async function getOneCredentialByIdAndVerify(credentialId: number, userId: number) {
     const result = await credentialsRepositories.getOneCredentialById(credentialId);
     
     if(!result){

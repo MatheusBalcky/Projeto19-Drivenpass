@@ -1,8 +1,8 @@
 import { Router } from "express";
 import { signUpController, signInController } from "../controllers/authController";
 import { authMiddle } from "../middlewares/authMiddle";
-import { createCredentialController, getCredentialsController } from "../controllers/credentialsController";
-import { createCredentialMiddle, getCredentialsMiddle } from "../middlewares/credentialsMiddle";
+import { createCredentialController, getCredentialsController, deleteCredentialController } from "../controllers/credentialsController";
+import { createCredentialMiddle, getCredentialsMiddle, deleteCredentialsMiddle } from "../middlewares/credentialsMiddle";
 
 const routes = Router();
 
@@ -17,9 +17,12 @@ routes.post('/signin', authMiddle, signInController);
 routes.post('/createCredential', createCredentialMiddle, createCredentialController);
 
 
-//& Create new record
+//& Get credentials by id or not
 routes.get('/credentials', getCredentialsMiddle, getCredentialsController);
 
+
+//& Delete credential by id
+routes.delete('/credentials/:credentialId', deleteCredentialsMiddle, deleteCredentialController);
 
 
 

@@ -18,3 +18,12 @@ export async function getCredentialsController (req: Request, res: Response) {
 
     res.status(200).send(result);
 }
+
+export async function deleteCredentialController (req: Request, res: Response) {
+    const credentialId = Number(req.params.credentialId);
+    const userId = Number(res.locals.tokenInfo.userId);
+
+    await crendentialsServices.deleteCredentialService(credentialId, userId);
+
+    res.status(200).send('Credential deleted with success!');
+}

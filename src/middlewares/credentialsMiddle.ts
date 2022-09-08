@@ -26,6 +26,16 @@ export async function getCredentialsMiddle(req: Request, res: Response, next: Ne
     next();
 }
 
+export async function deleteCredentialsMiddle(req: Request, res: Response, next: NextFunction) {
+    const token = String(req.headers.authorization?.replace('Bearer ', ''));
+
+    const tokenInfo = jwt.validateToken(token);
+
+    res.locals.tokenInfo = tokenInfo;
+
+    next();
+}
+
 
 
 
