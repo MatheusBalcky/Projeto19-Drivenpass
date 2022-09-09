@@ -7,5 +7,5 @@ export const cardDataSchema = Joi.object({
     cvcCard: Joi.string().length(3).pattern(/^[0-9]+$/).required(),
     expirationDate: Joi.date().required(),
     password: Joi.string().max(12).required(),
-    isVirtual: Joi.boolean(),
+    isVirtual: Joi.boolean().strict(),
 });
