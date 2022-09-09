@@ -21,7 +21,7 @@ export async function getCardController(req: Request, res: Response) {
 }
 
 export async function deleteCardController(req: Request, res: Response) {
-    const cardId = Number(req.params.cardId);
+    const cardId = parseInt(req.params.cardId);
     const userId = Number(res.locals.tokenInfo.userId);
 
     await cardService.deleteCardService(cardId, userId);

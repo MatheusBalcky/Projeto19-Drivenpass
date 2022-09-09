@@ -25,6 +25,8 @@ import {
     createCardController, 
     getCardController, 
     deleteCardController} from "../controllers/cardsController";
+import * as wifiMiddle from '../middlewares/wifisMiddle'
+import * as wifiController from '../controllers/wifisController'
 
 const routes = Router();
 
@@ -52,7 +54,12 @@ routes.delete('/safenote/:safenoteId', deleteSafenoteMiddle, deleteSafenoteContr
 // * CARDS ROUTES
 routes.post('/new-card', createCardMiddle, createCardController);
 routes.get('/cards', getCardMiddle, getCardController ); 
-routes.delete('/card/:cardId', deleteCardMiddle, deleteCardController); 
+routes.delete('/card/:cardId', deleteCardMiddle, deleteCardController);
+
+// * WI-FI ROUTES
+routes.post('/new-wifi', wifiMiddle.newWifi, wifiController.newWifi);
+routes.get('/wifis', wifiMiddle.getWifis, wifiController.getWifis); 
+routes.delete('/wifi/:wifiId', wifiMiddle.deleteWifi, wifiController.deleteWifi); 
 
 
 
