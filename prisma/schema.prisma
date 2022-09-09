@@ -15,10 +15,11 @@ model users {
   email       String        @unique
   password    String
   created_at  DateTime      @default(now())
+  
   credentials credentials[]
   safenotes safenotes[]
+  cards cards[]
 }
-
 model credentials {
   id      Int   @id @default(autoincrement())
 
@@ -32,7 +33,6 @@ model credentials {
 
   @@unique([title, user_id])
 }
-
 model safenotes {
   id      Int   @id @default(autoincrement())
 
@@ -41,6 +41,22 @@ model safenotes {
 
   title String @db.VarChar(50)
   annotation String @db.VarChar(1000)
+
+  @@unique([title, user_id])
+}
+model cards {
+  id      Int   @id @default(autoincrement())
+
+  author  users @relation(fields: [user_id], references: [id])
+  user_id Int
+
+  title String @db.VarChar(50)
+  numberCard String @db.VarChar(16)
+  nameCard String @db.VarChar(30)
+  cvcCard String 
+  expirationDate String
+  password String
+  isVirtual Boolean
 
   @@unique([title, user_id])
 }
